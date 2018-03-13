@@ -7,18 +7,18 @@
   
   <title>Hello World | Be a dreamer. Keep sleeping.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="來玩玩看 Hexo, 順便幫自己的學習作個筆記。 沒想到一開始就踩到雷，不過這個鍋應該算是 GitHub 的。 原本是想在 FlandreDaisuki.github.io/blog 下放所有 Hexo 的東西，但不管在 FlandreDaisuki.github.io 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue hexo#1081 結論就是 GitHub Pages 的">
+  <meta name="description" content="來玩玩看 Hexo, 順便幫自己的學習作個筆記。 沒想到一開始就踩到雷，不過這個雷應該算是 GitHub 的。 原本是想在 FlandreDaisuki.github.io/blog 下放所有 Hexo 的東西，但不管在 FlandreDaisuki.github.io 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue (hexo#1081) 簡單來說 GitHub Pages">
 <meta name="keywords" content="hexo,gh-pages">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello World">
 <meta property="og:url" content="https://flandredaisuki.github.io/blog/2018/03/13/Hello-World/index.html">
 <meta property="og:site_name" content="Be a dreamer. Keep sleeping.">
-<meta property="og:description" content="來玩玩看 Hexo, 順便幫自己的學習作個筆記。 沒想到一開始就踩到雷，不過這個鍋應該算是 GitHub 的。 原本是想在 FlandreDaisuki.github.io/blog 下放所有 Hexo 的東西，但不管在 FlandreDaisuki.github.io 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue hexo#1081 結論就是 GitHub Pages 的">
+<meta property="og:description" content="來玩玩看 Hexo, 順便幫自己的學習作個筆記。 沒想到一開始就踩到雷，不過這個雷應該算是 GitHub 的。 原本是想在 FlandreDaisuki.github.io/blog 下放所有 Hexo 的東西，但不管在 FlandreDaisuki.github.io 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue (hexo#1081) 簡單來說 GitHub Pages">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2018-03-13T15:23:19.609Z">
+<meta property="og:updated_time" content="2018-03-13T16:37:56.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="來玩玩看 Hexo, 順便幫自己的學習作個筆記。 沒想到一開始就踩到雷，不過這個鍋應該算是 GitHub 的。 原本是想在 FlandreDaisuki.github.io/blog 下放所有 Hexo 的東西，但不管在 FlandreDaisuki.github.io 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue hexo#1081 結論就是 GitHub Pages 的">
+<meta name="twitter:description" content="來玩玩看 Hexo, 順便幫自己的學習作個筆記。 沒想到一開始就踩到雷，不過這個雷應該算是 GitHub 的。 原本是想在 FlandreDaisuki.github.io/blog 下放所有 Hexo 的東西，但不管在 FlandreDaisuki.github.io 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue (hexo#1081) 簡單來說 GitHub Pages">
   
     <link rel="alternate" href="/blog/atom.xml" title="Be a dreamer. Keep sleeping." type="application/atom+xml">
   
@@ -88,14 +88,21 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>來玩玩看 Hexo, 順便幫自己的學習作個筆記。</p>
-<p>沒想到一開始就踩到雷，不過這個鍋應該算是 GitHub 的。</p>
-<p>原本是想在 <code>FlandreDaisuki.github.io/blog</code> 下放所有 Hexo 的東西，但不管在 <code>FlandreDaisuki.github.io</code> 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue <a href="https://github.com/hexojs/hexo/issues/1081" target="_blank" rel="noopener">hexo#1081</a></p>
-<p>結論就是 GitHub Pages 的 subdirectory 就是一個 repo，直接創一個 repo 丟到 <code>gh-pages</code> 下就好了。</p>
+<p>沒想到一開始就踩到雷，不過這個雷應該算是 GitHub 的。</p>
+<p>原本是想在 <code>FlandreDaisuki.github.io/blog</code> 下放所有 Hexo 的東西，但不管在 <code>FlandreDaisuki.github.io</code> 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue (<a href="https://github.com/hexojs/hexo/issues/1081" target="_blank" rel="noopener">hexo#1081</a>)</p>
+<p>簡單來說 GitHub Pages 的 subdirectory 分成兩種：</p>
+<ol>
+<li><code>{user}/{repo}</code> 下的 <code>gh-pages</code> 分支或是 <code>master</code> 分支下的 <code>docs</code> 資料夾作為 subdirectory 的根目錄 <a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/" target="_blank" rel="noopener">*1</a></li>
+<li><code>{user}.github.io</code> 這個特殊名字的 repo 下的 subdirectory</li>
+</ol>
+<p>如果是用第一點的情況，只要創個 <code>blog</code> 的 repo 然後讓 Hexo 部署到 <code>gh-pages</code> 分支下即可。</p>
+<p>第二點則是將 <code>$ hexo generate</code> 出來的靜態網站丟到 <code>{user}.github.io</code> 下的 <code>blog</code> 資料夾。</p>
+<p>因為第一點可以調整 <code>_config.yml</code> 用 <code>hexo-cli</code> 來做，且有<a href="https://hexo.io/zh-tw/docs/deployment.html#Git" target="_blank" rel="noopener">現成的方案</a>，所以最後使用第一點的解法。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://flandredaisuki.github.io/blog/2018/03/13/Hello-World/" data-id="cjept4cd90000nbfb11h3cncf" class="article-share-link">Share</a>
+      <a data-url="https://flandredaisuki.github.io/blog/2018/03/13/Hello-World/" data-id="cjepv3bms00000dfbttlvbvia" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/gh-pages/">gh-pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/">hexo</a></li></ul>
