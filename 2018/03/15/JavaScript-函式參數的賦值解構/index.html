@@ -5,15 +5,20 @@
   
 
   
-  <title>Be a dreamer. Keep sleeping.</title>
+  <title>JavaScript 函式參數的賦值解構 | Be a dreamer. Keep sleeping.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Be a dreamer. Keep sleeping.">
-<meta property="og:url" content="https://flandredaisuki.github.io/blog/index.html">
+  <meta name="description" content="前言ES6 可以在函式宣告時將 Object, Array 類型的參數直接解構成區域變數，下面舉個例子： 1234567891011// 傳統參數傳值function exp(base, exponent) &amp;#123;    return base ** exponent;&amp;#125;exp(4, 3) //=&amp;gt; 64// ES6 參數賦值解構function exp(&amp;#123; bas">
+<meta name="keywords" content="es6,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 函式參數的賦值解構">
+<meta property="og:url" content="https://flandredaisuki.github.io/blog/2018/03/15/JavaScript-函式參數的賦值解構/index.html">
 <meta property="og:site_name" content="Be a dreamer. Keep sleeping.">
+<meta property="og:description" content="前言ES6 可以在函式宣告時將 Object, Array 類型的參數直接解構成區域變數，下面舉個例子： 1234567891011// 傳統參數傳值function exp(base, exponent) &amp;#123;    return base ** exponent;&amp;#125;exp(4, 3) //=&amp;gt; 64// ES6 參數賦值解構function exp(&amp;#123; bas">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-03-14T17:46:40.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Be a dreamer. Keep sleeping.">
+<meta name="twitter:title" content="JavaScript 函式參數的賦值解構">
+<meta name="twitter:description" content="前言ES6 可以在函式宣告時將 Object, Array 類型的參數直接解構成區域變數，下面舉個例子： 1234567891011// 傳統參數傳值function exp(base, exponent) &amp;#123;    return base ** exponent;&amp;#125;exp(4, 3) //=&amp;gt; 64// ES6 參數賦值解構function exp(&amp;#123; bas">
   
     <link rel="alternate" href="/blog/atom.xml" title="Be a dreamer. Keep sleeping." type="application/atom+xml">
   
@@ -60,9 +65,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-JavaScript-函式參數的賦值解構" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JavaScript-函式參數的賦值解構" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2018/03/15/JavaScript-函式參數的賦值解構/" class="article-date">
   <time datetime="2018-03-14T16:35:27.000Z" itemprop="datePublished">2018-03-15</time>
@@ -75,8 +78,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/03/15/JavaScript-函式參數的賦值解構/">JavaScript 函式參數的賦值解構</a>
+    <h1 class="article-title" itemprop="name">
+      JavaScript 函式參數的賦值解構
     </h1>
   
 
@@ -106,60 +109,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Hello-World" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2018/03/13/Hello-World/" class="article-date">
-  <time datetime="2018-03-13T14:43:58.000Z" itemprop="datePublished">2018-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/03/13/Hello-World/">Hello World</a>
-    </h1>
+    <a href="/blog/2018/03/13/Hello-World/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>來玩玩看 Hexo, 順便幫自己的學習作個筆記。</p>
-<p>沒想到一開始就踩到雷，不過這個雷應該算是 GitHub 的。</p>
-<p>原本是想在 <code>FlandreDaisuki.github.io/blog</code> 下放所有 Hexo 的東西，但不管在 <code>FlandreDaisuki.github.io</code> 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue (<a href="https://github.com/hexojs/hexo/issues/1081" target="_blank" rel="noopener">hexo#1081</a>)</p>
-<p>簡單來說 GitHub Pages 的 subdirectory 分成兩種：</p>
-<ol>
-<li><code>{user}/{repo}</code> 下的 <code>gh-pages</code> 分支或是 <code>master</code> 分支下的 <code>docs</code> 資料夾作為 subdirectory 的根目錄 <a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/" target="_blank" rel="noopener">*1</a></li>
-<li><code>{user}.github.io</code> 這個特殊名字的 repo 下的 subdirectory</li>
-</ol>
-<p>如果是用第一點的情況，只要創個 <code>blog</code> 的 repo 然後讓 Hexo 部署到 <code>gh-pages</code> 分支下即可。</p>
-<p>第二點則是將 <code>$ hexo generate</code> 出來的靜態網站丟到 <code>{user}.github.io</code> 下的 <code>blog</code> 資料夾。</p>
-<p>因為第一點可以調整 <code>_config.yml</code> 用 <code>hexo-cli</code> 來做，且有<a href="https://hexo.io/zh-tw/docs/deployment.html#Git" target="_blank" rel="noopener">現成的方案</a>，所以最後使用第一點的解法。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://flandredaisuki.github.io/blog/2018/03/13/Hello-World/" data-id="cjerc0bb60001qufblny9b3e2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/gh-pages/">gh-pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
