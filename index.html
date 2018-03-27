@@ -62,6 +62,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-在-JavaScript-中使用-GOTO-語法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/03/27/在-JavaScript-中使用-GOTO-語法/" class="article-date">
+  <time datetime="2018-03-27T07:10:39.000Z" itemprop="datePublished">2018-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/03/27/在-JavaScript-中使用-GOTO-語法/">在 JavaScript 中使用 GOTO 語法!?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>標題是在<ruby>致<rp>(</rp><rt>ㄊㄨˋ</rt><rp>)</rp>敬<rp></rp><rt>ㄘㄠˊ</rt><rp>)</rp></ruby>這篇文章：<a href="https://medium.com/@p5d12000/%E5%9C%A8-javascript-%E4%B8%AD%E4%BD%BF%E7%94%A8-goto-%E8%AA%9E%E6%B3%95-97f8756197df" target="_blank" rel="noopener">在 JavaScript 中使用 GOTO 語法</a>，如果你還沒看過可以先看看。</p>
+<h2><span id="qian-yan">前言</span></h2><p>看起來是蠻搞笑的沒錯，但有沒有很難迴避的狀況呢？看看下面這個例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> response = fetchSync(url); <span class="comment">// 假設拿到是 response 物件而不是 Promise</span></span><br><span class="line"><span class="keyword">let</span> result = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前處理</span></span><br><span class="line"><span class="keyword">if</span>(response) &#123;</span><br><span class="line">  <span class="keyword">const</span> html = response.getHTMLObject();</span><br><span class="line">  <span class="keyword">if</span>(html.hasTargetObject()) &#123;</span><br><span class="line">    <span class="keyword">const</span> target = html.getTargetObject();</span><br><span class="line">    <span class="keyword">if</span>(target.value.isValid()) &#123;</span><br><span class="line">      result = target.value; <span class="comment">// 拿到了，想跳到後處理</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    target.updateInnerState(); <span class="comment">// 改變內部狀態機讓後面可以做</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(target.hasData()) &#123;</span><br><span class="line">      result = target.getData().toResult(); <span class="comment">// 拿到了，想跳到後處理</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    target.updateInnerState(); <span class="comment">// 改變內部狀態機讓後面可以做</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(target.getId()) &#123;</span><br><span class="line">      result = target.getId().toResult(); <span class="comment">// 拿到了，想跳到後處理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  html.resolveResult(); <span class="comment">// 確定會搞出 result</span></span><br><span class="line">  result = html.getResult(); <span class="comment">// 拿到了，想跳到... 最後了不用跳</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 後處理</span></span><br><span class="line"><span class="keyword">if</span>(result) &#123;</span><br><span class="line">  <span class="comment">// do something awesome works...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面這個例子在前處理用了三層<code>if</code>和三個平行的<code>if</code>，然後任何一個地方失敗就希望跳出去給後處理，但是又不希望 throw Exception，這要怎麼辦呢？</p>
+<h2><span id="chong-dian">重點</span></h2><p>其實是因為最近在幫學長 debug 的時候看到一個很漂亮的寫法可以解決這件事，如下：<br><figure class="highlight js"><figcaption><span>do...while(0)</span><a href="https://github.com/FlandreDaisuki/NflxMultiSubs/blob/master/src/nflxmultisubs.js#L552-L653" target="_blank" rel="noopener">NflxMultiSubs</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前處理</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(currentVideoElem &amp;&amp; <span class="keyword">this</span>.videoElem.src !== currentVideoElem.src) &#123;</span><br><span class="line">    <span class="comment">// 跟 video element 相關問題錯誤</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 略 */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.subtitleWrapperElem || !<span class="keyword">this</span>.subtitleWrapperElem.parentNode) &#123;</span><br><span class="line">    <span class="keyword">const</span> playerContainerElem = <span class="built_in">document</span>.querySelector(<span class="string">'.nf-player-container'</span>);</span><br><span class="line">    <span class="keyword">if</span> (!playerContainerElem) <span class="keyword">break</span>; <span class="comment">// 這邊在雙層 if 內，也可以做到直接跳到後處理</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 略 */</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 略 */</span></span><br><span class="line">&#125; <span class="keyword">while</span>(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 後處理</span></span><br><span class="line"><span class="keyword">this</span>.isRunning &amp;&amp; <span class="built_in">window</span>.requestAnimationFrame(<span class="keyword">this</span>.loop.bind(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure></p>
+<p>看大神們的 code 總是能發現一些奇技淫巧，真棒！ ♥️</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://flandredaisuki.github.io/blog/2018/03/27/在-JavaScript-中使用-GOTO-語法/" data-id="cjf9evknt0003z6fbya15quyh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/奇技淫巧/">奇技淫巧</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2018-一月番短評" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2018/03/27/2018-一月番短評/" class="article-date">
@@ -134,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://flandredaisuki.github.io/blog/2018/03/27/2018-一月番短評/" data-id="cjf98pznu0000uefbn48kc8ox" class="article-share-link">Share</a>
+      <a data-url="https://flandredaisuki.github.io/blog/2018/03/27/2018-一月番短評/" data-id="cjf9evknh0000z6fb41xz5y5s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ACG/">ACG</a></li></ul>
@@ -186,10 +230,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://flandredaisuki.github.io/blog/2018/03/15/JavaScript-函式參數的賦值解構/" data-id="cjf98pzo20003uefbi9tmup9s" class="article-share-link">Share</a>
+      <a data-url="https://flandredaisuki.github.io/blog/2018/03/15/JavaScript-函式參數的賦值解構/" data-id="cjf9evknw0004z6fbkxart32l" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/es6/">es6</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/奇技淫巧/">奇技淫巧</a></li></ul>
 
     </footer>
   </div>
@@ -235,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://flandredaisuki.github.io/blog/2018/03/13/Hello-World/" data-id="cjf98pznz0001uefbk6ao34o0" class="article-share-link">Share</a>
+      <a data-url="https://flandredaisuki.github.io/blog/2018/03/13/Hello-World/" data-id="cjf9evknp0001z6fbwa32s75h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/gh-pages/">gh-pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/">hexo</a></li></ul>
@@ -260,7 +304,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ACG/">ACG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/gh-pages/">gh-pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hexo/">hexo</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ACG/">ACG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/gh-pages/">gh-pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/奇技淫巧/">奇技淫巧</a></li></ul>
     </div>
   </div>
 
@@ -270,7 +314,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/ACG/" style="font-size: 10px;">ACG</a> <a href="/blog/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/blog/tags/es6/" style="font-size: 10px;">es6</a> <a href="/blog/tags/gh-pages/" style="font-size: 10px;">gh-pages</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a>
+      <a href="/blog/tags/ACG/" style="font-size: 10px;">ACG</a> <a href="/blog/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/blog/tags/es6/" style="font-size: 10px;">es6</a> <a href="/blog/tags/gh-pages/" style="font-size: 10px;">gh-pages</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/奇技淫巧/" style="font-size: 20px;">奇技淫巧</a>
     </div>
   </div>
 
@@ -290,6 +334,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2018/03/27/在-JavaScript-中使用-GOTO-語法/">在 JavaScript 中使用 GOTO 語法!?</a>
+          </li>
         
           <li>
             <a href="/blog/2018/03/27/2018-一月番短評/">2018 一月番短評</a>
