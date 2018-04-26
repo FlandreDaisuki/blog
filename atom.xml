@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.flandre.tw/"/>
-  <updated>2018-04-07T16:36:53.610Z</updated>
+  <updated>2018-04-26T05:46:10.545Z</updated>
   <id>https://blog.flandre.tw/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>讓 GitHub Pages 掛在自己的域名上</title>
+    <link href="https://blog.flandre.tw/2018/04/26/%E8%AE%93-GitHub-Pages-%E6%8E%9B%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D%E4%B8%8A/"/>
+    <id>https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/</id>
+    <published>2018-04-26T04:40:47.000Z</published>
+    <updated>2018-04-26T05:46:10.545Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近拿到 Gandi 的優惠券就就去換了個 <code>flandre.tw</code> 的域名來用，然後想讓<code>flandredaisuki.github.io/blog/</code>內容，可以用<code>blog.flandre.tw/</code>代替，而且要可以支援 https。</p><h2><span id="zhi-jue-jie-fa">直覺解法</span></h2><p>GitHub 官方有提供教學：<a href="https://help.github.com/articles/setting-up-a-custom-subdomain/" target="_blank" rel="noopener">https://help.github.com/articles/setting-up-a-custom-subdomain/</a></p><p>我在 Gandi 的區域檔紀錄下加了一個 CNAME record (注意最後那一個<code>.</code>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CNAME blog flandredaisuki.github.io.</span><br></pre></td></tr></table></figure></p><img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_records.jpg" title="Gandi Records 界面"><p>並且在我的 <a href="https://github.com/FlandreDaisuki/blog" target="_blank" rel="noopener">blog repo</a> 底下加了一個 CNAME 檔<br><figure class="highlight plain"><figcaption><span>CNAME</span><a href="https://github.com/FlandreDaisuki/blog/blob/gh-pages/CNAME" target="_blank" rel="noopener">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.flandre.tw</span><br></pre></td></tr></table></figure></p><p>內容是過去了，但是沒有 https，因為 GitHub 的憑證只驗證他們自己的域名 (*.github.io)。</p><h2><span id="cloudflare">Cloudflare</span></h2><p>在求助後學到了一個好像蠻普遍的作法，讓 <a href="https://zh.wikipedia.org/wiki/%E5%85%A7%E5%AE%B9%E5%82%B3%E9%81%9E%E7%B6%B2%E8%B7%AF" target="_blank" rel="noopener">CDN</a> 代管內容。也就是原本 GitHub 的憑證驗證的內容，改成 Cloudflare 憑證去驗證代管的內容。</p><p>但是要將 Gandi DNS 改成 Cloudflare 的 DNS。</p><img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_dns.jpg" title="Gandi DNS 界面"><p>他會複製原本的 Gandi 那邊的 DNS record。然後等個 30 分鐘或更久，讓 DNS record 更新之後就成功了！</p><img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/CloudFlare_records.jpg" title="CloudFlare Records 界面"><h2><span id="hexo-she-ding">Hexo 設定</span></h2><p>因為 root 改變了所以要改一下 <code>_config.yml</code><br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-url: https://flandredaisuki.github.io/blog/</span></span><br><span class="line"><span class="deletion">-root: /blog/</span></span><br><span class="line"><span class="addition">+url: https://blog.flandre.tw</span></span><br><span class="line"><span class="addition">+root: /</span></span><br></pre></td></tr></table></figure></p><p>打完收工！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近拿到 Gandi 的優惠券就就去換了個 &lt;code&gt;flandre.tw&lt;/code&gt; 的域名來用，然後想讓&lt;code&gt;flandredaisuki.github.io/blog/&lt;/code&gt;內容，可以用&lt;code&gt;blog.flandre.tw/&lt;/code&gt;代替，
+      
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="https://blog.flandre.tw/tags/Hexo/"/>
+    
+      <category term="GitHub Pages" scheme="https://blog.flandre.tw/tags/GitHub-Pages/"/>
+    
+      <category term="DNS" scheme="https://blog.flandre.tw/tags/DNS/"/>
+    
+      <category term="CDN" scheme="https://blog.flandre.tw/tags/CDN/"/>
+    
+  </entry>
   
   <entry>
     <title>2018 一月番短評</title>
@@ -90,11 +119,11 @@
     </summary>
     
     
-      <category term="es6" scheme="https://blog.flandre.tw/tags/es6/"/>
-    
       <category term="JavaScript" scheme="https://blog.flandre.tw/tags/JavaScript/"/>
     
       <category term="奇技淫巧" scheme="https://blog.flandre.tw/tags/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"/>
+    
+      <category term="es6" scheme="https://blog.flandre.tw/tags/es6/"/>
     
   </entry>
   
@@ -103,7 +132,7 @@
     <link href="https://blog.flandre.tw/2018/03/13/Hello-World/"/>
     <id>https://blog.flandre.tw/2018/03/13/Hello-World/</id>
     <published>2018-03-13T14:43:58.000Z</published>
-    <updated>2018-03-13T16:43:00.000Z</updated>
+    <updated>2018-04-26T05:40:33.928Z</updated>
     
     <content type="html"><![CDATA[<p>來玩玩看 Hexo, 順便幫自己的學習作個筆記。</p><p>沒想到一開始就踩到雷，不過這個雷應該算是 GitHub 的。</p><p>原本是想在 <code>FlandreDaisuki.github.io/blog</code> 下放所有 Hexo 的東西，但不管在 <code>FlandreDaisuki.github.io</code> 這個 repo 下怎麼設定都出不來，搜尋一下發現了這個 issue (<a href="https://github.com/hexojs/hexo/issues/1081" target="_blank" rel="noopener">hexo#1081</a>)</p><p>簡單來說 GitHub Pages 的 subdirectory 分成兩種：</p><ol><li><code>{user}/{repo}</code> 下的 <code>gh-pages</code> 分支或是 <code>master</code> 分支下的 <code>docs</code> 資料夾作為 subdirectory 的根目錄 <a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/" target="_blank" rel="noopener">*1</a></li><li><code>{user}.github.io</code> 這個特殊名字的 repo 下的 subdirectory</li></ol><p>如果是用第一點的情況，只要創個 <code>blog</code> 的 repo 然後讓 Hexo 部署到 <code>gh-pages</code> 分支下即可。</p><p>第二點則是將 <code>$ hexo generate</code> 出來的靜態網站丟到 <code>{user}.github.io</code> 下的 <code>blog</code> 資料夾。</p><p>因為第一點可以調整 <code>_config.yml</code> 用 <code>hexo-cli</code> 來做，且有<a href="https://hexo.io/zh-tw/docs/deployment.html#Git" target="_blank" rel="noopener">現成的方案</a>，所以最後使用第一點的解法。</p>]]></content>
     
@@ -119,9 +148,9 @@
     </summary>
     
     
-      <category term="hexo" scheme="https://blog.flandre.tw/tags/hexo/"/>
+      <category term="Hexo" scheme="https://blog.flandre.tw/tags/Hexo/"/>
     
-      <category term="gh-pages" scheme="https://blog.flandre.tw/tags/gh-pages/"/>
+      <category term="GitHub Pages" scheme="https://blog.flandre.tw/tags/GitHub-Pages/"/>
     
   </entry>
   

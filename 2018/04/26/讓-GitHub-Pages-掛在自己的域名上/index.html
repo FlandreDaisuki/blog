@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>讓 GitHub Pages 掛在自己的域名上 | Be a dreamer. Keep sleeping.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近拿到 Gandi 的優惠券就就去換了個 flandre.tw 的域名來用，然後想讓flandredaisuki.github.io/blog/內容，可以用blog.flandre.tw/代替，而且要可以支援 https。 直覺解法GitHub 官方有提供教學：https://help.github.com/articles/setting-up-a-custom-subdomain/ 我在 G">
+<meta name="keywords" content="Hexo,GitHub Pages,DNS,CDN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="讓 GitHub Pages 掛在自己的域名上">
+<meta property="og:url" content="https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/index.html">
+<meta property="og:site_name" content="Be a dreamer. Keep sleeping.">
+<meta property="og:description" content="最近拿到 Gandi 的優惠券就就去換了個 flandre.tw 的域名來用，然後想讓flandredaisuki.github.io/blog/內容，可以用blog.flandre.tw/代替，而且要可以支援 https。 直覺解法GitHub 官方有提供教學：https://help.github.com/articles/setting-up-a-custom-subdomain/ 我在 G">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_records.jpg">
+<meta property="og:image" content="https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_dns.jpg">
+<meta property="og:image" content="https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/CloudFlare_records.jpg">
+<meta property="og:updated_time" content="2018-04-26T05:46:10.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="讓 GitHub Pages 掛在自己的域名上">
+<meta name="twitter:description" content="最近拿到 Gandi 的優惠券就就去換了個 flandre.tw 的域名來用，然後想讓flandredaisuki.github.io/blog/內容，可以用blog.flandre.tw/代替，而且要可以支援 https。 直覺解法GitHub 官方有提供教學：https://help.github.com/articles/setting-up-a-custom-subdomain/ 我在 G">
+<meta name="twitter:image" content="https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_records.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Be a dreamer. Keep sleeping." type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Be a dreamer. Keep sleeping.</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.flandre.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-讓-GitHub-Pages-掛在自己的域名上" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/" class="article-date">
+  <time datetime="2018-04-26T04:40:47.000Z" itemprop="datePublished">2018-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      讓 GitHub Pages 掛在自己的域名上
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近拿到 Gandi 的優惠券就就去換了個 <code>flandre.tw</code> 的域名來用，然後想讓<code>flandredaisuki.github.io/blog/</code>內容，可以用<code>blog.flandre.tw/</code>代替，而且要可以支援 https。</p>
+<h2><span id="zhi-jue-jie-fa">直覺解法</span></h2><p>GitHub 官方有提供教學：<a href="https://help.github.com/articles/setting-up-a-custom-subdomain/" target="_blank" rel="noopener">https://help.github.com/articles/setting-up-a-custom-subdomain/</a></p>
+<p>我在 Gandi 的區域檔紀錄下加了一個 CNAME record (注意最後那一個<code>.</code>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CNAME blog flandredaisuki.github.io.</span><br></pre></td></tr></table></figure></p>
+<img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_records.jpg" title="Gandi Records 界面">
+<p>並且在我的 <a href="https://github.com/FlandreDaisuki/blog" target="_blank" rel="noopener">blog repo</a> 底下加了一個 CNAME 檔<br><figure class="highlight plain"><figcaption><span>CNAME</span><a href="https://github.com/FlandreDaisuki/blog/blob/gh-pages/CNAME" target="_blank" rel="noopener">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.flandre.tw</span><br></pre></td></tr></table></figure></p>
+<p>內容是過去了，但是沒有 https，因為 GitHub 的憑證只驗證他們自己的域名 (*.github.io)。</p>
+<h2><span id="cloudflare">Cloudflare</span></h2><p>在求助後學到了一個好像蠻普遍的作法，讓 <a href="https://zh.wikipedia.org/wiki/%E5%85%A7%E5%AE%B9%E5%82%B3%E9%81%9E%E7%B6%B2%E8%B7%AF" target="_blank" rel="noopener">CDN</a> 代管內容。也就是原本 GitHub 的憑證驗證的內容，改成 Cloudflare 憑證去驗證代管的內容。</p>
+<p>但是要將 Gandi DNS 改成 Cloudflare 的 DNS。</p>
+<img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_dns.jpg" title="Gandi DNS 界面">
+<p>他會複製原本的 Gandi 那邊的 DNS record。然後等個 30 分鐘或更久，讓 DNS record 更新之後就成功了！</p>
+<img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/CloudFlare_records.jpg" title="CloudFlare Records 界面">
+<h2><span id="hexo-she-ding">Hexo 設定</span></h2><p>因為 root 改變了所以要改一下 <code>_config.yml</code><br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-url: https://flandredaisuki.github.io/blog/</span></span><br><span class="line"><span class="deletion">-root: /blog/</span></span><br><span class="line"><span class="addition">+url: https://blog.flandre.tw</span></span><br><span class="line"><span class="addition">+root: /</span></span><br></pre></td></tr></table></figure></p>
+<p>打完收工！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/" data-id="cjgg3xlhm0003sffb052cwvi3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CDN/">CDN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/30/2018-一月番短評/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2018 一月番短評</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACG/">ACG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDN/">CDN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/奇技淫巧/">奇技淫巧</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ACG/" style="font-size: 10px;">ACG</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/GitHub-Pages/" style="font-size: 20px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 20px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/奇技淫巧/" style="font-size: 20px;">奇技淫巧</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/">讓 GitHub Pages 掛在自己的域名上</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/30/2018-一月番短評/">2018 一月番短評</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/在-JavaScript-中使用-GOTO-語法/">在 JavaScript 中使用 GOTO 語法!?</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/15/JavaScript-函式參數的賦值解構/">JavaScript 函式參數的賦值解構</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/13/Hello-World/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Chun-Hao Lien<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

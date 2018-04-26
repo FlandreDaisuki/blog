@@ -62,6 +62,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-讓-GitHub-Pages-掛在自己的域名上" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/" class="article-date">
+  <time datetime="2018-04-26T04:40:47.000Z" itemprop="datePublished">2018-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/">讓 GitHub Pages 掛在自己的域名上</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近拿到 Gandi 的優惠券就就去換了個 <code>flandre.tw</code> 的域名來用，然後想讓<code>flandredaisuki.github.io/blog/</code>內容，可以用<code>blog.flandre.tw/</code>代替，而且要可以支援 https。</p>
+<h2><span id="zhi-jue-jie-fa">直覺解法</span></h2><p>GitHub 官方有提供教學：<a href="https://help.github.com/articles/setting-up-a-custom-subdomain/" target="_blank" rel="noopener">https://help.github.com/articles/setting-up-a-custom-subdomain/</a></p>
+<p>我在 Gandi 的區域檔紀錄下加了一個 CNAME record (注意最後那一個<code>.</code>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CNAME blog flandredaisuki.github.io.</span><br></pre></td></tr></table></figure></p>
+<img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_records.jpg" title="Gandi Records 界面">
+<p>並且在我的 <a href="https://github.com/FlandreDaisuki/blog" target="_blank" rel="noopener">blog repo</a> 底下加了一個 CNAME 檔<br><figure class="highlight plain"><figcaption><span>CNAME</span><a href="https://github.com/FlandreDaisuki/blog/blob/gh-pages/CNAME" target="_blank" rel="noopener">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.flandre.tw</span><br></pre></td></tr></table></figure></p>
+<p>內容是過去了，但是沒有 https，因為 GitHub 的憑證只驗證他們自己的域名 (*.github.io)。</p>
+<h2><span id="cloudflare">Cloudflare</span></h2><p>在求助後學到了一個好像蠻普遍的作法，讓 <a href="https://zh.wikipedia.org/wiki/%E5%85%A7%E5%AE%B9%E5%82%B3%E9%81%9E%E7%B6%B2%E8%B7%AF" target="_blank" rel="noopener">CDN</a> 代管內容。也就是原本 GitHub 的憑證驗證的內容，改成 Cloudflare 憑證去驗證代管的內容。</p>
+<p>但是要將 Gandi DNS 改成 Cloudflare 的 DNS。</p>
+<img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/Gandi_dns.jpg" title="Gandi DNS 界面">
+<p>他會複製原本的 Gandi 那邊的 DNS record。然後等個 30 分鐘或更久，讓 DNS record 更新之後就成功了！</p>
+<img src="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/CloudFlare_records.jpg" title="CloudFlare Records 界面">
+<h2><span id="hexo-she-ding">Hexo 設定</span></h2><p>因為 root 改變了所以要改一下 <code>_config.yml</code><br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-url: https://flandredaisuki.github.io/blog/</span></span><br><span class="line"><span class="deletion">-root: /blog/</span></span><br><span class="line"><span class="addition">+url: https://blog.flandre.tw</span></span><br><span class="line"><span class="addition">+root: /</span></span><br></pre></td></tr></table></figure></p>
+<p>打完收工！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.flandre.tw/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/" data-id="cjgg3xlhm0003sffb052cwvi3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CDN/">CDN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2018-一月番短評" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/30/2018-一月番短評/" class="article-date">
@@ -207,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.flandre.tw/2018/03/30/2018-一月番短評/" data-id="cjgg19atg000hizfb69aazuci" class="article-share-link">Share</a>
+      <a data-url="https://blog.flandre.tw/2018/03/30/2018-一月番短評/" data-id="cjgg3xlif000qsffblhuj6f7n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACG/">ACG</a></li></ul>
@@ -252,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.flandre.tw/2018/03/27/在-JavaScript-中使用-GOTO-語法/" data-id="cjgg19asw0003izfbw8ojov6k" class="article-share-link">Share</a>
+      <a data-url="https://blog.flandre.tw/2018/03/27/在-JavaScript-中使用-GOTO-語法/" data-id="cjgg3xlhi0001sffb0az8pf86" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/奇技淫巧/">奇技淫巧</a></li></ul>
@@ -304,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.flandre.tw/2018/03/15/JavaScript-函式參數的賦值解構/" data-id="cjgg19ass0001izfb9hjgh7oi" class="article-share-link">Share</a>
+      <a data-url="https://blog.flandre.tw/2018/03/15/JavaScript-函式參數的賦值解構/" data-id="cjgg3xlho0004sffbhv02uxyg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/奇技淫巧/">奇技淫巧</a></li></ul>
@@ -353,10 +404,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.flandre.tw/2018/03/13/Hello-World/" data-id="cjgg19aso0000izfbyjdbrvra" class="article-share-link">Share</a>
+      <a data-url="https://blog.flandre.tw/2018/03/13/Hello-World/" data-id="cjgg3xlhf0000sffbzrd57zyg" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gh-pages/">gh-pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
 
     </footer>
   </div>
@@ -378,7 +429,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACG/">ACG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gh-pages/">gh-pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/奇技淫巧/">奇技淫巧</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACG/">ACG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDN/">CDN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/奇技淫巧/">奇技淫巧</a></li></ul>
     </div>
   </div>
 
@@ -388,7 +439,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ACG/" style="font-size: 10px;">ACG</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/gh-pages/" style="font-size: 10px;">gh-pages</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/奇技淫巧/" style="font-size: 20px;">奇技淫巧</a>
+      <a href="/tags/ACG/" style="font-size: 10px;">ACG</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/GitHub-Pages/" style="font-size: 20px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 20px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/奇技淫巧/" style="font-size: 20px;">奇技淫巧</a>
     </div>
   </div>
 
@@ -397,7 +448,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">彙整</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
     </div>
   </div>
 
@@ -408,6 +459,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/">讓 GitHub Pages 掛在自己的域名上</a>
+          </li>
         
           <li>
             <a href="/2018/03/30/2018-一月番短評/">2018 一月番短評</a>
