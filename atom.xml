@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.flandre.tw/"/>
-  <updated>2018-05-02T01:55:10.640Z</updated>
+  <updated>2018-05-06T04:57:28.141Z</updated>
   <id>https://blog.flandre.tw/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GitHub Pages Custom Domain HTTPS</title>
+    <link href="https://blog.flandre.tw/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/"/>
+    <id>https://blog.flandre.tw/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/</id>
+    <published>2018-05-06T04:28:50.000Z</published>
+    <updated>2018-05-06T04:57:28.141Z</updated>
+    
+    <content type="html"><![CDATA[<p>在我<a href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/">折騰 GitHub Pages</a> 的幾天之後，GitHub 就宣佈他們提供了讓自定義域名也可擁有 HTTPS。</p><p>大部分流程和 Othree 大大<a href="http://blog.othree.net/log/2018/05/04/github-pages-custom-domain-https/" target="_blank" rel="noopener">這篇</a>流程差不多，但…等好幾天他不簽給我，我也一直不敢動他，因為怕如果我一動，就要重新排隊了。但是在看到大家都在兩天以內簽好，我還是重新又做了一次。</p><ol><li>把 Cloudflare 的 proxy 拿掉</li><li>整個站重新 push 上 GitHub Pages (含 CNAME)</li></ol><p>結果幾個小時之後就拿到 Let’s Encrypt 的簽證了…</p><img src="/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/Let_s_Encrypt.jpg"><p>結果還是搞不懂為什麼之前等半天不簽給我… 😔</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在我&lt;a href=&quot;/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/&quot;&gt;折騰 GitHub Pages&lt;/a&gt; 的幾天之後，GitHub 就宣佈他們提供了讓自定義域名也可擁有 HTTPS。&lt;/p&gt;
+&lt;p&gt;大部分流程和 Othree 大大&lt;a hre
+      
+    
+    </summary>
+    
+    
+      <category term="GitHub Pages" scheme="https://blog.flandre.tw/tags/GitHub-Pages/"/>
+    
+      <category term="HTTPS" scheme="https://blog.flandre.tw/tags/HTTPS/"/>
+    
+  </entry>
   
   <entry>
     <title>讓 GitHub Pages 掛在自己的域名上</title>
@@ -35,9 +61,9 @@
     </summary>
     
     
-      <category term="Hexo" scheme="https://blog.flandre.tw/tags/Hexo/"/>
-    
       <category term="GitHub Pages" scheme="https://blog.flandre.tw/tags/GitHub-Pages/"/>
+    
+      <category term="Hexo" scheme="https://blog.flandre.tw/tags/Hexo/"/>
     
       <category term="DNS" scheme="https://blog.flandre.tw/tags/DNS/"/>
     
@@ -148,9 +174,9 @@
     </summary>
     
     
-      <category term="Hexo" scheme="https://blog.flandre.tw/tags/Hexo/"/>
-    
       <category term="GitHub Pages" scheme="https://blog.flandre.tw/tags/GitHub-Pages/"/>
+    
+      <category term="Hexo" scheme="https://blog.flandre.tw/tags/Hexo/"/>
     
   </entry>
   

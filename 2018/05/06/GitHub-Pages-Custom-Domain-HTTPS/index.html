@@ -5,15 +5,22 @@
   
 
   
-  <title>Tag: ACG | Be a dreamer. Keep sleeping.</title>
+  <title>GitHub Pages Custom Domain HTTPS | Be a dreamer. Keep sleeping.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Be a dreamer. Keep sleeping.">
-<meta property="og:url" content="https://blog.flandre.tw/tags/ACG/index.html">
+  <meta name="description" content="在我折騰 GitHub Pages 的幾天之後，GitHub 就宣佈他們提供了讓自定義域名也可擁有 HTTPS。 大部分流程和 Othree 大大這篇流程差不多，但…等好幾天他不簽給我，我也一直不敢動他，因為怕如果我一動，就要重新排隊了。但是在看到大家都在兩天以內簽好，我還是重新又做了一次。  把 Cloudflare 的 proxy 拿掉 整個站重新 push 上 GitHub Pages (含">
+<meta name="keywords" content="GitHub Pages,HTTPS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub Pages Custom Domain HTTPS">
+<meta property="og:url" content="https://blog.flandre.tw/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/index.html">
 <meta property="og:site_name" content="Be a dreamer. Keep sleeping.">
+<meta property="og:description" content="在我折騰 GitHub Pages 的幾天之後，GitHub 就宣佈他們提供了讓自定義域名也可擁有 HTTPS。 大部分流程和 Othree 大大這篇流程差不多，但…等好幾天他不簽給我，我也一直不敢動他，因為怕如果我一動，就要重新排隊了。但是在看到大家都在兩天以內簽好，我還是重新又做了一次。  把 Cloudflare 的 proxy 拿掉 整個站重新 push 上 GitHub Pages (含">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://blog.flandre.tw/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/Let_s_Encrypt.jpg">
+<meta property="og:updated_time" content="2018-05-06T04:57:28.141Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Be a dreamer. Keep sleeping.">
+<meta name="twitter:title" content="GitHub Pages Custom Domain HTTPS">
+<meta name="twitter:description" content="在我折騰 GitHub Pages 的幾天之後，GitHub 就宣佈他們提供了讓自定義域名也可擁有 HTTPS。 大部分流程和 Othree 大大這篇流程差不多，但…等好幾天他不簽給我，我也一直不敢動他，因為怕如果我一動，就要重新排隊了。但是在看到大家都在兩天以內簽好，我還是重新又做了一次。  把 Cloudflare 的 proxy 拿掉 整個站重新 push 上 GitHub Pages (含">
+<meta name="twitter:image" content="https://blog.flandre.tw/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/Let_s_Encrypt.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Be a dreamer. Keep sleeping." type="application/atom+xml">
   
@@ -60,40 +67,62 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/30/2018-一月番短評/" class="archive-article-date">
-  <time datetime="2018-03-29T19:17:00.000Z" itemprop="datePublished">3月 30</time>
+        <section id="main"><article id="post-GitHub-Pages-Custom-Domain-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/" class="article-date">
+  <time datetime="2018-05-06T04:28:50.000Z" itemprop="datePublished">2018-05-06</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/30/2018-一月番短評/">2018 一月番短評</a>
+    <h1 class="article-title" itemprop="name">
+      GitHub Pages Custom Domain HTTPS
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在我<a href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/">折騰 GitHub Pages</a> 的幾天之後，GitHub 就宣佈他們提供了讓自定義域名也可擁有 HTTPS。</p>
+<p>大部分流程和 Othree 大大<a href="http://blog.othree.net/log/2018/05/04/github-pages-custom-domain-https/" target="_blank" rel="noopener">這篇</a>流程差不多，但…等好幾天他不簽給我，我也一直不敢動他，因為怕如果我一動，就要重新排隊了。但是在看到大家都在兩天以內簽好，我還是重新又做了一次。</p>
+<ol>
+<li>把 Cloudflare 的 proxy 拿掉</li>
+<li>整個站重新 push 上 GitHub Pages (含 CNAME)</li>
+</ol>
+<p>結果幾個小時之後就拿到 Let’s Encrypt 的簽證了…</p>
+<img src="/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/Let_s_Encrypt.jpg">
+<p>結果還是搞不懂為什麼之前等半天不簽給我… 😔</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.flandre.tw/2018/05/06/GitHub-Pages-Custom-Domain-HTTPS/" data-id="cjguck2fy0003d2fbermex7px" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/">HTTPS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/26/讓-GitHub-Pages-掛在自己的域名上/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">讓 GitHub Pages 掛在自己的域名上</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
